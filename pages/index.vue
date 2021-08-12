@@ -16,7 +16,7 @@
                   <i class="fas fa-times"></i>
                 </div>
               </div>
-              <div class="invoice d-flex flex-row align-items-center mt-4">
+              <div class="d-flex flex-row align-items-center mt-4">
                 <div class="invoice-icon-box">
                   <div class="rounded-orange">
                     <img src="/icons-box.png" alt="" />
@@ -286,7 +286,7 @@
             </b-col>
             <b-col cols="4">
               <div class="map-construct">
-                <div class="invoice d-flex flex-row align-items-center">
+                <div class="d-flex flex-row align-items-center">
                   <div class="invoice-icon-box">
                     <div class="rounded-orange">
                       <img src="/icons-truck.png" alt="" />
@@ -332,7 +332,7 @@
                 </div>
               </div>
               <div class="detail-transaction mt-4">
-                <div class="invoice d-flex flex-row mb-3 align-items-center">
+                <div class="d-flex flex-row mb-3 align-items-center">
                   <div class="invoice-icon-box">
                     <div class="rounded-orange">
                       <img src="/icons-payment.png" alt="" />
