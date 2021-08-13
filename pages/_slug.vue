@@ -23,9 +23,12 @@
                   </div>
                 </div>
                 <div class="invoice-headline pl-3">
-                  <span>CA/08-21/00053</span
+                  <span>{{ dataOrder.invoice }}</span
                   ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
-                  <p>Invoice untuk Rizqi O (rizqi@example.com)</p>
+                  <p>
+                    Invoice untuk {{ dataOrder.shipping.name }} (
+                    {{ dataOrder.email }} )
+                  </p>
                 </div>
                 <div class="description-contact ml-auto mr-3">
                   <span>Hubungi Penjual</span>
@@ -295,7 +298,7 @@
                   <div class="invoice-headline pl-3">
                     <span>Pengiriman</span
                     ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
-                    <p>120040042107018</p>
+                    <p>{{ dataOrder.tracking_number }}</p>
                   </div>
                 </div>
                 <div class="map">
@@ -310,16 +313,18 @@
                       <b-col cols="9">
                         <div class="sender-title">Pengirim</div>
                         <div class="sender-name">
-                          Thariq Alfa (085672387343)
+                          {{ dataOrder.shipping_from.name }}
                         </div>
                         <div class="sender-address">
-                          Jl. Ikan Piranha 105. Kota Malang
+                          {{ dataOrder.shipping_from.address }}
                         </div>
                         <br />
                         <div class="sender-title">Penerima</div>
-                        <div class="sender-name">Rizqi O (085672387343)</div>
+                        <div class="sender-name">
+                          {{ dataOrder.shipping.name }}
+                        </div>
                         <div class="sender-address">
-                          Jl. Melati 90 Blok C. Kota Surabaya
+                          {{ dataOrder.shipping.address }}
                         </div>
                       </b-col>
                     </b-row>
@@ -341,13 +346,15 @@
                   <div class="transaction-headline pl-3">
                     <span>Konfirmasi Total</span
                     ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
-                    <p><b>Rp. 325.000</b></p>
+                    <p>
+                      <b>Rp. {{ dataOrder.grand_total }}</b>
+                    </p>
                   </div>
                 </div>
                 <div class="w-100 d-flex detail-price mb-2">
                   <span class="w-50 d-inline-block">Sub Total</span>
                   <span class="w-50 d-inline-block text-right"
-                    >Rp. 300.000</span
+                    >Rp.{{ dataOrder.subtotal }}</span
                   >
                 </div>
                 <div class="w-100 d-flex detail-price mb-2">
@@ -360,18 +367,20 @@
                 </div>
                 <div class="w-100 d-flex detail-price mb-2">
                   <span class="w-50 d-inline-block">Ongkir</span>
-                  <span class="w-50 d-inline-block text-right">Rp. 25.000</span>
-                </div>
-                <div class="w-100 d-flex detail-price mb-5">
-                  <span class="w-50 d-inline-block">Total</span>
                   <span class="w-50 d-inline-block text-right"
-                    >Rp. 325.000</span
+                    >Rp. {{ dataOrder.shipping_total }}</span
                   >
                 </div>
                 <div class="w-100 d-flex detail-price mb-5">
                   <span class="w-50 d-inline-block">Total</span>
                   <span class="w-50 d-inline-block text-right"
-                    ><b>Rp. 325.000</b></span
+                    >Rp. {{ dataOrder.grand_total }}</span
+                  >
+                </div>
+                <div class="w-100 d-flex detail-price mb-5">
+                  <span class="w-50 d-inline-block">Total</span>
+                  <span class="w-50 d-inline-block text-right"
+                    ><b>Rp. {{ dataOrder.grand_total }}</b></span
                   >
                 </div>
                 <div class="w-100 text-center border-r-10" @click="submit">
@@ -394,14 +403,16 @@
 
 <script>
 export default {
-  layout: 'default',
-  head: {
-    script: [
-      {
-        type: 'module',
-        src: 'https://app.sandbox.midtrans.com/snap/snap.js',
-      },
-    ],
+  data() {
+    return {
+      dataOrder: [],
+    }
+  },
+  async fetch() {
+    this.dataOrder = await fetch(
+      'https://api.checkoutaja.com/v1/orders/find-by-token?identity=f3373cf5-eb44-4cf8-a97d-bd3b26bdb69c'
+    ).then((res) => res.json())
+    console.log(this.dataOrder)
   },
   mounted() {
     const mapScript = document.createElement('script')
