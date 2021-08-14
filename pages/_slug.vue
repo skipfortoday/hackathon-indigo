@@ -429,8 +429,29 @@ export default {
   },
 
   methods: {
-    submit() {
-      window.snap.pay('90b18777-582c-41cf-9f9e-23d6b50197f1', {
+    async submit() {
+      const paramEmail = this.dataOrder.email
+      const paramInvoice = this.dataOrder.invoice
+      const myHeaders = new Headers()
+      myHeaders.append('Content-Type', 'application/x-www-form-urlencoded')
+
+      const urlencoded = new URLSearchParams()
+      urlencoded.append('email', paramEmail)
+
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: 'follow',
+      }
+
+      const dataFetch = await fetch(
+        `https://api.checkoutaja.com/v1/payment-gateway/create?invoice=${paramInvoice}`,
+        requestOptions
+      ).then((res) => res.json())
+      const tokenMidtrans = dataFetch.token
+
+      window.snap.pay(tokenMidtrans, {
         // Optional
         onSuccess(result) {
           console.log('sukses', result)
