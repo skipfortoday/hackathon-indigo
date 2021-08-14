@@ -403,16 +403,20 @@
 
 <script>
 export default {
+  async asyncData({ params }) {
+    const slug = await params.slug
+    return { slug }
+  },
   data() {
     return {
       dataOrder: [],
     }
   },
   async fetch() {
+    const params = await this.slug
     this.dataOrder = await fetch(
-      'https://api.checkoutaja.com/v1/orders/find-by-token?identity=f3373cf5-eb44-4cf8-a97d-bd3b26bdb69c'
+      `https://api.checkoutaja.com/v1/orders/find-by-token?identity=${params}`
     ).then((res) => res.json())
-    console.log(this.dataOrder)
   },
   mounted() {
     const mapScript = document.createElement('script')
@@ -423,6 +427,7 @@ export default {
     mapScript.setAttribute('data-client-key', 'SB-Mid-client-LM2o4CHigqTKi2PA')
     document.head.appendChild(mapScript)
   },
+
   methods: {
     submit() {
       window.snap.pay('90b18777-582c-41cf-9f9e-23d6b50197f1', {
