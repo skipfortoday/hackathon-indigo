@@ -4,7 +4,7 @@
       <div class="pos-absolute">
         <b-container class="my-4">
           <b-row>
-            <b-col cols="8">
+            <b-col cols="12" md="8">
               <div class="notification d-flex flex-row align-items-center">
                 <div class="notification-icon-truck">
                   <img src="/icons-truck.png" alt="" />
@@ -41,20 +41,20 @@
                 <img src="/banner-1.png" class="w-100" alt="" />
               </div>
               <b-row class="mt-4">
-                <b-col cols="3">
+                <b-col cols="6" md="3">
                   <div class="detail-status text-center">
                     Menunggu Pembayaran
                   </div>
                 </b-col>
-                <b-col cols="3">
+                <b-col cols="6" md="3">
                   <div class="detail-status text-center">
                     Pembayaran Berhasil
                   </div>
                 </b-col>
-                <b-col cols="3">
+                <b-col cols="6" md="3">
                   <div class="detail-status text-center">Dikirim</div>
                 </b-col>
-                <b-col cols="3">
+                <b-col cols="6" md="3">
                   <div class="detail-status-accepted text-center">Diterima</div>
                 </b-col>
               </b-row>
@@ -75,7 +75,7 @@
                 </div>
               </div>
               <b-row class="mt-4">
-                <b-col cols="3" class="card-product mb-3">
+                <b-col cols="6" md="3" class="card-product mb-3">
                   <div class="image-product">
                     <img src="/img-1.png" alt="" />
                   </div>
@@ -105,7 +105,7 @@
                       </div>
                     </div>
                   </div> </b-col
-                ><b-col cols="3" class="card-product mb-3">
+                ><b-col cols="6" md="3" class="card-product mb-3">
                   <div class="image-product">
                     <img src="/img-1.png" alt="" />
                   </div>
@@ -136,7 +136,7 @@
                     </div>
                   </div>
                 </b-col>
-                <b-col cols="3" class="card-product mb-3">
+                <b-col cols="6" md="3" class="card-product mb-3">
                   <div class="image-product">
                     <img src="/img-1.png" alt="" />
                   </div>
@@ -167,7 +167,7 @@
                     </div>
                   </div>
                 </b-col>
-                <b-col cols="3" class="card-product mb-3">
+                <b-col cols="6" md="3" class="card-product mb-3">
                   <div class="image-product">
                     <img src="/img-1.png" alt="" />
                   </div>
@@ -287,7 +287,7 @@
                 </b-row>
               </div>
             </b-col>
-            <b-col cols="4">
+            <b-col cols="12" md="4">
               <div class="map-construct">
                 <div class="d-flex flex-row align-items-center">
                   <div class="invoice-icon-box">
