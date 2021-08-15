@@ -15,10 +15,10 @@ export default {
       { rel: 'stylesheet', href: '/css/style.css' },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap',
+        // href: 'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap',
       },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      // { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+      // { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     ],
     script: [
       {
@@ -47,12 +47,14 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+    '@nuxtjs/moment',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-clipboard',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -67,5 +69,12 @@ export default {
         ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
       ],
     },
+  },
+  moment: {
+    defaultLocale: 'id',
+    locales: ['id'],
+  },
+  clipboard: {
+    autoSetContainer: true,
   },
 }

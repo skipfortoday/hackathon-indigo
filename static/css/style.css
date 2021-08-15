@@ -1,223 +1,241 @@
 .notification {
-    padding: 12px;
-    border-radius: 20px;
-    background: #FFA500;
+  padding: 12px;
+  border-radius: 20px;
+  background: #0099ff;
+}
+
+.notification-success-payment {
+  padding: 12px;
+  border-radius: 20px;
+  background: #ffa500;
+}
+
+.notification-success-delivery {
+  padding: 12px;
+  border-radius: 20px;
+  background: #42ba96;
+}
+
+.notification-danger {
+  padding: 12px;
+  border-radius: 20px;
+  background: #ff472f;
 }
 
 .pos-relative {
-    position: relative!important;
-    width: 100%;
+  position: relative !important;
+  width: 100%;
 }
 
 .pos-absolute {
-    position: absolute!important;
-    width: 100%;
+  position: absolute !important;
+  width: 100%;
 }
 
 .notification-icon-truck {
-    background-color: #ffeedd;
-    padding: 5px;
-    border-radius: 5px;
+  background-color: #ffeedd;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .notification-icon-truck img {
-    width: 24px;
+  width: 24px;
 }
 
 .notification-text {
-    padding-left: 10px;
-    color: #fff;
+  padding-left: 10px;
+  color: #fff;
 }
 
 .notification-text span {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .rounded-orange {
-    background-color: #ffeedd;
-    padding: 5px;
-    border-radius: 5px;
+  background-color: #ffeedd;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .rounded-orange img {
-    width: 32px;
+  width: 32px;
 }
 
 .invoice-headline span {
-    font-weight: bold;
-    font-size: 20px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .invoice-headline img {
-    width: 35px;
+  width: 35px;
 }
 
 .invoice-headline p {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .detail-status {
-    font-size: 12px;
-    background-color: #254192;
-    color: #fff;
-    padding: 5px;
-    border-radius: 10px;
+  font-size: 12px;
+  background-color: #254192;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .detail-status-accepted {
-    font-size: 12px;
-    background-color: #FFA500;
-    color: #fff;
-    padding: 5px;
-    border-radius: 10px;
+  font-size: 12px;
+  background-color: #ffa500;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .rounded-title {
-    background-color: #FFA500;
-    padding: 5px;
-    border-radius: 10px;
-    position: absolute;
-    width: 170px;
-    height: 25px;
+  background-color: #ffa500;
+  padding: 5px;
+  border-radius: 10px;
+  position: absolute;
+  width: 170px;
+  height: 25px;
 }
 
 .rounded-title span {
-    top: -18px;
-    position: absolute;
-    left: -15px;
-    font-size: 24px;
+  top: -18px;
+  position: absolute;
+  left: -15px;
+  font-size: 24px;
 }
 
 .description-order span {
-    font-size: 14px;
-    color: #5F5F5F;
+  font-size: 14px;
+  color: #5f5f5f;
 }
 
 .rounded-purple {
-    background-color: #E8E8E8;
-    padding: 10px;
-    border-radius: 10px;
-    color: #5F5F5F;
-    font-size: 12px;
+  background-color: #e8e8e8;
+  padding: 10px;
+  border-radius: 10px;
+  color: #5f5f5f;
+  font-size: 12px;
 }
 
 .image-product img {
-    width: 100%;
+  width: 100%;
 }
 
 .card-detail {
-    background-color: #fff;
-    border-radius: 15px;
-    position: relative;
-    padding: 10px;
-    z-index: 1;
-    margin-top: -50px;
+  background-color: #fff;
+  border-radius: 15px;
+  position: relative;
+  padding: 10px;
+  z-index: 1;
+  margin-top: -50px;
 }
 
 .title-product {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .star-construct {
-    margin-top: -10px;
+  margin-top: -10px;
 }
 
 .star {
-    width: 50px;
+  width: 50px;
 }
 
 .card-detail-quality {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .payment span {
-    padding-top: 5px;
+  padding-top: 5px;
 }
 
 .payment img {
-    width: 100px;
+  width: 100px;
 }
 
 .payment-construct {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .date-construct {
-    color: #5F5F5F;
-    font-size: 13px;
+  color: #5f5f5f;
+  font-size: 13px;
 }
 
 .payment-detail {
-    font-size: 13px;
-    padding-left: 5px;
+  font-size: 13px;
+  padding-left: 5px;
 }
 
 .map img {
-    width: 100%;
+  width: 100%;
 }
 
 .map-construct {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .sender-construct {
-    padding: 0 10px;
+  padding: 0 10px;
 }
 
 .sender-detail {
-    padding: 30px 30px 20px 30px;
-    background-color: #fff;
-    border-radius: 20px;
-    margin-top: -50px;
-    position: relative;
+  padding: 30px 30px 20px 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-top: -50px;
+  position: relative;
 }
 
 .sender-ico img {
-    width: 40px;
+  width: 40px;
 }
 
 .sender-title {
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .sender-name {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .sender-address {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .detail-transaction {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
 }
 
 .transaction-headline span {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .detail-price {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .border-r-10 {
-    border-radius: 20px;
-    background: #FFA500;
-    color: #fff;
-    padding: 10px;
+  border-radius: 20px;
+  background: #ffa500;
+  color: #fff;
+  padding: 10px;
 }
 
 .note-org {
-    color: #FFA500;
+  color: #ffa500;
 }
 
 .fonts-2 {
-    font-size: 12px;
+  font-size: 12px;
 }

@@ -3,17 +3,101 @@
     <div class="pos-relative">
       <div class="pos-absolute">
         <b-container class="my-4">
+          <b-alert v-if="copyMessage !== ''" variant="success" show>
+            <i class="fas fa-copy fa-lg"></i>
+            {{ copyMessage }}</b-alert
+          >
           <b-row>
             <b-col cols="12" md="8">
-              <div class="notification d-flex flex-row align-items-center">
+              <div
+                v-if="dataOrder.status === 'PEMBAYARAN BERHASIL'"
+                class="
+                  notification-success-payment
+                  d-flex
+                  flex-row
+                  align-items-center
+                "
+              >
+                <div class="notification-icon-truck">
+                  <img src="/icons8-invoice-44.png" alt="" />
+                </div>
+                <div class="notification-text">
+                  <span
+                    >Pembelian {{ dataOrder.status }} pada
+                    {{ $moment(dataOrder.updated_at).format('llll') }}</span
+                  >
+                </div>
+              </div>
+              <div
+                v-if="dataOrder.status === 'MENUNGGU PEMBAYARAN'"
+                class="notification d-flex flex-row align-items-center"
+              >
+                <div class="notification-icon-truck">
+                  <img src="/icons8-alarm-48.png" alt="" />
+                </div>
+                <div class="notification-text">
+                  <span
+                    >Pembelian {{ dataOrder.status }} pada
+                    {{ $moment(dataOrder.updated_at).format('llll') }}</span
+                  >
+                </div>
+              </div>
+              <div
+                v-if="
+                  ['PEMBAYARAN DITOLAK', 'KADALUARSA', 'DIBATALKAN'].includes(
+                    dataOrder.status
+                  )
+                "
+                class="notification-danger d-flex flex-row align-items-center"
+              >
+                <div class="notification-icon-truck">
+                  <img src="/icons8-cancel-44.png" alt="" />
+                </div>
+                <div class="notification-text">
+                  <span
+                    >Pembelian {{ dataOrder.status }} pada
+                    {{ $moment(dataOrder.updated_at).format('llll') }}</span
+                  >
+                </div>
+              </div>
+
+              <div
+                v-if="['DIKIRIM'].includes(dataOrder.status)"
+                class="
+                  notification-success-delivery
+                  d-flex
+                  flex-row
+                  align-items-center
+                "
+              >
                 <div class="notification-icon-truck">
                   <img src="/icons-truck.png" alt="" />
                 </div>
                 <div class="notification-text">
-                  <span>Pembelian dikirim pada 20 Juli 2020 12:10</span>
+                  <span
+                    >Pembelian {{ dataOrder.status }} pada
+                    {{ $moment(dataOrder.updated_at).format('llll') }}</span
+                  >
                 </div>
-                <div class="close-ico ml-auto">
-                  <i class="fas fa-times"></i>
+              </div>
+
+              <div
+                v-if="['DITERIMA'].includes(dataOrder.status)"
+                class="
+                  notification-success-delivery
+                  d-flex
+                  flex-row
+                  align-items-center
+                "
+              >
+                <div class="notification-icon-truck">
+                  <img src="/icons8-box-44.png" alt="" />
+                </div>
+                <div class="notification-text">
+                  <span
+                    >Pembelian {{ dataOrder.status }} pada
+                    {{ $moment(dataOrder.updated_at).format('llll') }}</span
+                  >
                 </div>
               </div>
               <div class="d-flex flex-row align-items-center mt-4">
@@ -24,7 +108,14 @@
                 </div>
                 <div class="invoice-headline col-12 col-md-8">
                   <span>{{ dataOrder.invoice }}</span
-                  ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
+                  ><img
+                    class="pl-3"
+                    style="cursor: copy"
+                    src="/vector-copy.png"
+                    alt="Salin"
+                    @click="copyText(dataOrder.invoice)"
+                  />
+                  <br />
                   <p>
                     Invoice untuk {{ dataOrder.shipping.name }} (
                     {{ dataOrder.email }} )
@@ -41,21 +132,78 @@
                 <img src="/banner-1.png" class="w-100" alt="" />
               </div>
               <b-row class="mt-4">
-                <b-col class="col-6 col-md-3 p-1">
-                  <div class="detail-status text-center">
+                <b-col
+                  v-if="
+                    ['PEMBAYARAN DITOLAK', 'KADALUARSA', 'DIBATALKAN'].includes(
+                      dataOrder.status
+                    )
+                  "
+                  class="col-6 col-md-3 p-1"
+                >
+                  <div
+                    :class="
+                      [
+                        'PEMBAYARAN DITOLAK',
+                        'KADALUARSA',
+                        'DIBATALKAN',
+                      ].includes(dataOrder.status)
+                        ? 'detail-status text-center'
+                        : 'detail-status-accepted text-center'
+                    "
+                  >
+                    {{ dataOrder.status }}
+                  </div>
+                </b-col>
+                <b-col v-else class="col-6 col-md-3 p-1">
+                  <div
+                    :class="
+                      [
+                        'MENUNGGU PEMBAYARAN',
+                        'PEMBAYARAN BERHASIL',
+                        'DIKIRIM',
+                        'DITERIMA',
+                      ].includes(dataOrder.status)
+                        ? 'detail-status text-center'
+                        : 'detail-status-accepted text-center'
+                    "
+                  >
                     Menunggu Pembayaran
                   </div>
                 </b-col>
                 <b-col class="col-6 col-md-3 p-1">
-                  <div class="detail-status text-center">
+                  <div
+                    :class="
+                      ['PEMBAYARAN BERHASIL', 'DIKIRIM', 'DITERIMA'].includes(
+                        dataOrder.status
+                      )
+                        ? 'detail-status text-center'
+                        : 'detail-status-accepted text-center'
+                    "
+                  >
                     Pembayaran Berhasil
                   </div>
                 </b-col>
                 <b-col class="col-6 col-md-3 p-1">
-                  <div class="detail-status text-center">Dikirim</div>
+                  <div
+                    :class="
+                      ['DIKIRIM', 'DITERIMA'].includes(dataOrder.status)
+                        ? 'detail-status text-center'
+                        : 'detail-status-accepted text-center'
+                    "
+                  >
+                    Dikirim
+                  </div>
                 </b-col>
                 <b-col class="col-6 col-md-3 p-1">
-                  <div class="detail-status-accepted text-center">Diterima</div>
+                  <div
+                    :class="
+                      ['DITERIMA'].includes(dataOrder.status)
+                        ? 'detail-status text-center'
+                        : 'detail-status-accepted text-center'
+                    "
+                  >
+                    Diterima
+                  </div>
                 </b-col>
               </b-row>
               <div
@@ -76,24 +224,22 @@
                   <span>Waktu pembelian</span>
                 </div>
                 <div class="rounded-purple col-6 col-md-3">
-                  <img
-                    src="/icons-date.png
-"
-                    alt=""
-                  />
-                  19 July 2020 13:05
+                  <img src="/icons-date.png" />
+                  {{
+                    $moment(dataOrder.created_at).format('Do MMM YYYY hh:mm')
+                  }}
                 </div>
               </div>
               <b-row class="mt-4">
                 <b-col
-                  v-for="(data, index) in dataOrder['items']"
+                  v-for="(data, index) in dataOrder.items"
                   :key="index"
                   class="card-product mb-3 col-6 col-md-3 p-1"
                 >
                   <div class="image-product">
                     <img
                       :src="formatJson(data.product.media)"
-                      :alt="pic"
+                      :alt="data.product.name"
                       class="rounded mx-auto d-block"
                     />
                   </div>
@@ -129,92 +275,101 @@
                   </div>
                 </b-col>
               </b-row>
-              <b-row class="mt-4 d-flex justify-content-end">
-                <div class="d-flex payment justify-content-end pt-1 pr-3">
-                  <span class="pr-2">Pembayaran melalui BCA</span>
-                  <img src="/bca.png" alt="" />
+              <div v-if="dataOrder.payments.length > 0">
+                <b-row class="mt-4 d-flex justify-content-end">
+                  <div class="d-flex payment justify-content-end pt-1 pr-3">
+                    <span class="pr-2">Pembayaran melalui BCA</span>
+                    <img src="/bca.png" alt="" />
+                  </div>
+                </b-row>
+                <div class="payment-construct mt-4">
+                  <div class="d-flex flex-row align-items-center mt-2">
+                    <div class="rounded-title col-6 col-md-3">
+                      <span>Pembayaranmu</span>
+                    </div>
+                    <div
+                      class="description-order ml-auto mr-3 d-none d-md-flex"
+                    >
+                      <span>Pembayaran terakhir</span>
+                    </div>
+                    <div class="rounded-purple col-6 col-md-3">
+                      <img
+                        src="/icons-date.png
+"
+                        alt=""
+                      />
+                      {{
+                        $moment(
+                          dataOrder.payments[dataOrder.payments.length - 1]
+                            .created_at
+                        ).format('Do MMM YYYY hh:mm')
+                      }}
+                    </div>
+                  </div>
+                  <b-row class="mt-3">
+                    <b-col cols="3">
+                      <div class="date-construct">
+                        <img
+                          src="/icons-date.png
+"
+                          alt=""
+                        />
+                        <span>19 July 2020 13:05</span>
+                      </div>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">Bank Transfer</span>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">SETTLEMENT</span>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">Rp. 325.000</span>
+                    </b-col>
+                  </b-row>
+                  <b-row class="mt-3">
+                    <b-col cols="3">
+                      <div class="date-construct">
+                        <img
+                          src="/icons-date.png
+"
+                          alt=""
+                        />
+                        <span>19 July 2020 13:05</span>
+                      </div>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">Bank Transfer</span>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">SETTLEMENT</span>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">Rp. 325.000</span>
+                    </b-col>
+                  </b-row>
+                  <b-row class="mt-3">
+                    <b-col cols="3">
+                      <div class="date-construct">
+                        <img
+                          src="/icons-date.png
+"
+                          alt=""
+                        />
+                        <span>19 July 2020 13:05</span>
+                      </div>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">Bank Transfer</span>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">SETTLEMENT</span>
+                    </b-col>
+                    <b-col cols="3">
+                      <span class="payment-detail">Rp. 325.000</span>
+                    </b-col>
+                  </b-row>
                 </div>
-              </b-row>
-              <div class="payment-construct mt-4">
-                <div class="d-flex flex-row align-items-center mt-2">
-                  <div class="rounded-title col-6 col-md-3">
-                    <span>Pembayaranmu</span>
-                  </div>
-                  <div class="description-order ml-auto mr-3 d-none d-md-flex">
-                    <span>Pembayaran terakhir</span>
-                  </div>
-                  <div class="rounded-purple col-6 col-md-3">
-                    <img
-                      src="/icons-date.png
-"
-                      alt=""
-                    />
-                    19 July 2020 13:05
-                  </div>
-                </div>
-                <b-row class="mt-3">
-                  <b-col cols="3">
-                    <div class="date-construct">
-                      <img
-                        src="/icons-date.png
-"
-                        alt=""
-                      />
-                      <span>19 July 2020 13:05</span>
-                    </div>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">Bank Transfer</span>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">SETTLEMENT</span>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">Rp. 325.000</span>
-                  </b-col>
-                </b-row>
-                <b-row class="mt-3">
-                  <b-col cols="3">
-                    <div class="date-construct">
-                      <img
-                        src="/icons-date.png
-"
-                        alt=""
-                      />
-                      <span>19 July 2020 13:05</span>
-                    </div>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">Bank Transfer</span>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">SETTLEMENT</span>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">Rp. 325.000</span>
-                  </b-col>
-                </b-row>
-                <b-row class="mt-3">
-                  <b-col cols="3">
-                    <div class="date-construct">
-                      <img
-                        src="/icons-date.png
-"
-                        alt=""
-                      />
-                      <span>19 July 2020 13:05</span>
-                    </div>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">Bank Transfer</span>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">SETTLEMENT</span>
-                  </b-col>
-                  <b-col cols="3">
-                    <span class="payment-detail">Rp. 325.000</span>
-                  </b-col>
-                </b-row>
               </div>
             </b-col>
             <b-col cols="12" md="4">
@@ -227,8 +382,27 @@
                   </div>
                   <div class="invoice-headline pl-3">
                     <span>Pengiriman</span
-                    ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
-                    <p>{{ dataOrder.tracking_number }}</p>
+                    ><img
+                      class="pl-3"
+                      src="/vector-copy.png"
+                      alt="Salin"
+                      style="cursor: copy"
+                      @click="
+                        copyText(
+                          dataOrder.tracking_number
+                            ? dataOrder.tracking_number
+                            : 'Belum tersedia'
+                        )
+                      "
+                    />
+                    <br />
+                    <p>
+                      {{
+                        dataOrder.tracking_number
+                          ? dataOrder.tracking_number
+                          : 'Belum tersedia'
+                      }}
+                    </p>
                   </div>
                 </div>
                 <div class="map">
@@ -245,22 +419,30 @@
                         <div class="sender-name">
                           {{ dataOrder.shipping_from.name }}
                         </div>
-                        <div class="sender-address">
-                          {{ dataOrder.shipping_from.address }}
+                        <div
+                          v-b-tooltip.hover
+                          class="sender-address"
+                          :title="dataOrder.shipping_from.address"
+                        >
+                          {{ textLimit(dataOrder.shipping_from.address) }}
                         </div>
                         <br />
                         <div class="sender-title">Penerima</div>
                         <div class="sender-name">
                           {{ dataOrder.shipping.name }}
                         </div>
-                        <div class="sender-address">
-                          {{ dataOrder.shipping.address }}
+                        <div
+                          v-b-tooltip.hover
+                          class="sender-address"
+                          :title="dataOrder.shipping.address"
+                        >
+                          {{ textLimit(dataOrder.shipping.address) }}
                         </div>
                       </b-col>
                     </b-row>
                     <b-row class="text-center">
                       <b-col cols="12 mt-4">
-                        <img src="/jne.png" alt="" />
+                        <img width="120" src="/jne.png" alt="" />
                       </b-col>
                     </b-row>
                   </div>
@@ -275,7 +457,16 @@
                   </div>
                   <div class="transaction-headline pl-3">
                     <span>Konfirmasi Total</span
-                    ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
+                    ><img
+                      class="pl-3"
+                      src="/vector-copy.png"
+                      style="cursor: copy"
+                      alt="Salin"
+                      @click="
+                        copyText(formatRupiah(dataOrder.grand_total, 'Rp'))
+                      "
+                    />
+                    <br />
                     <p>
                       <b>{{ formatRupiah(dataOrder.grand_total, 'Rp') }}</b>
                     </p>
@@ -315,14 +506,23 @@
                     }}</b></span
                   >
                 </div>
-                <div class="w-100 text-center border-r-10" @click="submit">
+                <div
+                  v-if="dataOrder.status === 'MENUNGGU PEMBAYARAN'"
+                  class="w-100 text-center border-r-10"
+                  @click="submit"
+                >
                   Bayar
+                </div>
+                <div v-else class="w-100 text-center border-r-10">
+                  Pembelian Selesai
                 </div>
                 <div class="text-left mt-2 fonts-2">
                   Membayar dengan CheckoutAja, Anda menyatakan bahwa Anda telah
                   menyetujui
-                  <span class="note-org"> Syarat dan Ketentuan </span> yang
-                  berlaku.
+                  <a href="https://checkoutaja.com/terms" class="note-org">
+                    Syarat dan Ketentuan
+                  </a>
+                  yang berlaku.
                 </div>
               </div>
             </b-col>
@@ -342,6 +542,7 @@ export default {
   data() {
     return {
       dataOrder: false,
+      copyMessage: '',
     }
   },
   async fetch() {
@@ -420,13 +621,15 @@ export default {
       return hasil
     },
     formatJson(data) {
-      const result = data
-        .replace(/,.*/, '')
-        .replace(/["]/g, '')
-        .replace('[', '')
-        .replace(']', '')
-      console.log(result)
+      const result = JSON.parse(data)[0]
       return result
+    },
+    textLimit(text) {
+      return text.slice(0, 40) + (text.length > 40 ? '...' : '')
+    },
+    async copyText(text) {
+      await this.$copyText(text)
+      this.copyMessage = `${text} berhasil disalin`
     },
   },
 }
