@@ -17,12 +17,12 @@
                 </div>
               </div>
               <div class="d-flex flex-row align-items-center mt-4">
-                <div class="invoice-icon-box">
+                <div class="invoice-icon-box pb-2">
                   <div class="rounded-orange">
-                    <img src="/icons-box.png" alt="" />
+                    <img src="/icons-box.png" alt="" class="pb-1" />
                   </div>
                 </div>
-                <div class="invoice-headline pl-3">
+                <div class="invoice-headline col-12 col-md-8">
                   <span>{{ dataOrder.invoice }}</span
                   ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
                   <p>
@@ -30,10 +30,10 @@
                     {{ dataOrder.email }} )
                   </p>
                 </div>
-                <div class="description-contact ml-auto mr-3">
+                <div class="description-contact ml-auto mr-3 d-none d-md-flex">
                   <span>Hubungi Penjual</span>
                 </div>
-                <div class="rounded-orange">
+                <div class="rounded-orange d-none d-md-flex">
                   <img src="/icons-whatsapp.png" alt="" />
                 </div>
               </div>
@@ -41,31 +41,41 @@
                 <img src="/banner-1.png" class="w-100" alt="" />
               </div>
               <b-row class="mt-4">
-                <b-col cols="6" md="3">
+                <b-col class="col-6 col-md-3 p-1">
                   <div class="detail-status text-center">
                     Menunggu Pembayaran
                   </div>
                 </b-col>
-                <b-col cols="6" md="3">
+                <b-col class="col-6 col-md-3 p-1">
                   <div class="detail-status text-center">
                     Pembayaran Berhasil
                   </div>
                 </b-col>
-                <b-col cols="6" md="3">
+                <b-col class="col-6 col-md-3 p-1">
                   <div class="detail-status text-center">Dikirim</div>
                 </b-col>
-                <b-col cols="6" md="3">
+                <b-col class="col-6 col-md-3 p-1">
                   <div class="detail-status-accepted text-center">Diterima</div>
                 </b-col>
               </b-row>
-              <div class="head-order d-flex flex-row align-items-center mt-5">
-                <div class="rounded-title">
+              <div
+                class="
+                  head-order
+                  d-flex
+                  flex-row
+                  align-items-center
+                  mt-8
+                  pt-3
+                  pl-3
+                "
+              >
+                <div class="rounded-title col-6 col-md-3">
                   <span>Pembelianmu</span>
                 </div>
-                <div class="description-order ml-auto mr-3">
+                <div class="description-order ml-auto d-none d-md-flex pr-3">
                   <span>Waktu pembelian</span>
                 </div>
-                <div class="rounded-purple">
+                <div class="rounded-purple col-6 col-md-3">
                   <img
                     src="/icons-date.png
 "
@@ -75,14 +85,20 @@
                 </div>
               </div>
               <b-row class="mt-4">
-                <b-col cols="6" md="3" class="card-product mb-3">
+                <b-col
+                  v-for="(data, index) in dataOrder['items']"
+                  :key="index"
+                  class="card-product mb-3 col-6 col-md-3"
+                >
                   <div class="image-product">
-                    <img src="/img-1.png" alt="" />
+                    <img :src="formatJson(data.product.media)" :alt="pic" />
                   </div>
                   <div class="card-detail">
                     <div class="card-detail-title">
                       <div class="text-center mt-3">
-                        <span class="title-product">Kopi Arabica</span>
+                        <span class="title-product">{{
+                          data.product.name
+                        }}</span>
                       </div>
                       <div class="text-center star-construct">
                         <img src="star.png" class="star" alt="" />
@@ -94,126 +110,36 @@
                       <div class="w-100 d-flex card-detail-quality">
                         <span class="w-50 d-inline-block">Berat</span>
                         <span class="w-50 d-inline-block text-right"
-                          >800g/0,8kg</span
+                          >{{ data.product.weight }}g/{{
+                            onKilo(data.product.weight)
+                          }}kg</span
                         >
                       </div>
                       <div class="w-100 d-flex card-detail-quality">
                         <span class="w-50 d-inline-block">Harga</span>
-                        <span class="w-50 d-inline-block text-right"
-                          >Rp. 105.000</span
-                        >
-                      </div>
-                    </div>
-                  </div> </b-col
-                ><b-col cols="6" md="3" class="card-product mb-3">
-                  <div class="image-product">
-                    <img src="/img-1.png" alt="" />
-                  </div>
-                  <div class="card-detail">
-                    <div class="card-detail-title">
-                      <div class="text-center mt-3">
-                        <span class="title-product">Kopi Arabica</span>
-                      </div>
-                      <div class="text-center star-construct">
-                        <img src="star.png" class="star" alt="" />
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Kuantitas</span>
-                        <span class="w-50 d-inline-block text-right">30</span>
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Berat</span>
-                        <span class="w-50 d-inline-block text-right"
-                          >800g/0,8kg</span
-                        >
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Harga</span>
-                        <span class="w-50 d-inline-block text-right"
-                          >Rp. 105.000</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </b-col>
-                <b-col cols="6" md="3" class="card-product mb-3">
-                  <div class="image-product">
-                    <img src="/img-1.png" alt="" />
-                  </div>
-                  <div class="card-detail">
-                    <div class="card-detail-title">
-                      <div class="text-center mt-3">
-                        <span class="title-product">Kopi Arabica</span>
-                      </div>
-                      <div class="text-center star-construct">
-                        <img src="star.png" class="star" alt="" />
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Kuantitas</span>
-                        <span class="w-50 d-inline-block text-right">30</span>
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Berat</span>
-                        <span class="w-50 d-inline-block text-right"
-                          >800g/0,8kg</span
-                        >
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Harga</span>
-                        <span class="w-50 d-inline-block text-right"
-                          >Rp. 105.000</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </b-col>
-                <b-col cols="6" md="3" class="card-product mb-3">
-                  <div class="image-product">
-                    <img src="/img-1.png" alt="" />
-                  </div>
-                  <div class="card-detail">
-                    <div class="card-detail-title">
-                      <div class="text-center mt-3">
-                        <span class="title-product">Kopi Arabica</span>
-                      </div>
-                      <div class="text-center star-construct">
-                        <img src="star.png" class="star" alt="" />
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Kuantitas</span>
-                        <span class="w-50 d-inline-block text-right">30</span>
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Berat</span>
-                        <span class="w-50 d-inline-block text-right"
-                          >800g/0,8kg</span
-                        >
-                      </div>
-                      <div class="w-100 d-flex card-detail-quality">
-                        <span class="w-50 d-inline-block">Harga</span>
-                        <span class="w-50 d-inline-block text-right"
-                          >Rp. 105.000</span
-                        >
+                        <span class="w-50 d-inline-block text-right">{{
+                          formatRupiah(data.product.price, 'Rp')
+                        }}</span>
                       </div>
                     </div>
                   </div>
                 </b-col>
               </b-row>
               <b-row class="mt-4 d-flex justify-content-end">
-                <div class="d-flex payment justify-content-end">
+                <div class="d-flex payment justify-content-end pt-1 pr-3">
                   <span class="pr-2">Pembayaran melalui BCA</span>
                   <img src="/bca.png" alt="" />
                 </div>
               </b-row>
               <div class="payment-construct mt-4">
                 <div class="d-flex flex-row align-items-center mt-2">
-                  <div class="rounded-title">
+                  <div class="rounded-title col-6 col-md-3">
                     <span>Pembayaranmu</span>
                   </div>
-                  <div class="description-order ml-auto mr-3">
+                  <div class="description-order ml-auto mr-3 d-none d-md-flex">
                     <span>Pembayaran terakhir</span>
                   </div>
-                  <div class="rounded-purple">
+                  <div class="rounded-purple col-6 col-md-3">
                     <img
                       src="/icons-date.png
 "
@@ -347,15 +273,15 @@
                     <span>Konfirmasi Total</span
                     ><img class="pl-3" src="/vector-copy.png" alt="" /> <br />
                     <p>
-                      <b>Rp. {{ dataOrder.grand_total }}</b>
+                      <b>{{ formatRupiah(dataOrder.grand_total, 'Rp') }}</b>
                     </p>
                   </div>
                 </div>
                 <div class="w-100 d-flex detail-price mb-2">
                   <span class="w-50 d-inline-block">Sub Total</span>
-                  <span class="w-50 d-inline-block text-right"
-                    >Rp.{{ dataOrder.subtotal }}</span
-                  >
+                  <span class="w-50 d-inline-block text-right">{{
+                    formatRupiah(dataOrder.subtotal, 'Rp')
+                  }}</span>
                 </div>
                 <div class="w-100 d-flex detail-price mb-2">
                   <span class="w-50 d-inline-block">Fee</span>
@@ -367,20 +293,22 @@
                 </div>
                 <div class="w-100 d-flex detail-price mb-2">
                   <span class="w-50 d-inline-block">Ongkir</span>
-                  <span class="w-50 d-inline-block text-right"
-                    >Rp. {{ dataOrder.shipping_total }}</span
-                  >
+                  <span class="w-50 d-inline-block text-right">{{
+                    formatRupiah(dataOrder.shipping_total, 'Rp')
+                  }}</span>
+                </div>
+                <div class="w-100 d-flex detail-price mb-5">
+                  <span class="w-50 d-inline-block">Total</span>
+                  <span class="w-50 d-inline-block text-right">{{
+                    formatRupiah(dataOrder.grand_total, 'Rp')
+                  }}</span>
                 </div>
                 <div class="w-100 d-flex detail-price mb-5">
                   <span class="w-50 d-inline-block">Total</span>
                   <span class="w-50 d-inline-block text-right"
-                    >Rp. {{ dataOrder.grand_total }}</span
-                  >
-                </div>
-                <div class="w-100 d-flex detail-price mb-5">
-                  <span class="w-50 d-inline-block">Total</span>
-                  <span class="w-50 d-inline-block text-right"
-                    ><b>Rp. {{ dataOrder.grand_total }}</b></span
+                    ><b>{{
+                      formatRupiah(dataOrder.grand_total, 'Rp')
+                    }}</b></span
                   >
                 </div>
                 <div class="w-100 text-center border-r-10" @click="submit">
@@ -409,14 +337,15 @@ export default {
   },
   data() {
     return {
-      dataOrder: [],
+      dataOrder: false,
     }
   },
   async fetch() {
     const params = await this.slug
-    this.dataOrder = await fetch(
+    const dataFetch = await fetch(
       `https://api.checkoutaja.com/v1/orders/find-by-token?identity=${params}`
     ).then((res) => res.json())
+    this.dataOrder = dataFetch
   },
   mounted() {
     const mapScript = document.createElement('script')
@@ -427,7 +356,6 @@ export default {
     mapScript.setAttribute('data-client-key', 'SB-Mid-client-LM2o4CHigqTKi2PA')
     document.head.appendChild(mapScript)
   },
-
   methods: {
     async submit() {
       const paramEmail = this.dataOrder.email
@@ -466,6 +394,35 @@ export default {
           console.log('error', result)
         },
       })
+    },
+    formatRupiah(angka, prefix) {
+      const numberString = angka.replace(/[^,\d]/g, '').toString()
+      const split = numberString.split(',')
+      const sisa = split[0].length % 3
+      let rupiah = split[0].substr(0, sisa)
+      const ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+      if (ribuan) {
+        const separator = sisa ? '.' : ''
+        rupiah += separator + ribuan.join('.')
+      }
+
+      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah
+      return prefix === undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : ''
+    },
+    onKilo(angka) {
+      const hasil = angka / 1000
+      return hasil
+    },
+    formatJson(data) {
+      const result = data
+        .replace(/,.*/, '')
+        .replace(/["]/g, '')
+        .replace('[', '')
+        .replace(']', '')
+      console.log(result)
+      return result
     },
   },
 }
