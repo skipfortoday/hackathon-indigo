@@ -88,10 +88,14 @@
                 <b-col
                   v-for="(data, index) in dataOrder['items']"
                   :key="index"
-                  class="card-product mb-3 col-6 col-md-3"
+                  class="card-product mb-3 col-6 col-md-3 p-1"
                 >
                   <div class="image-product">
-                    <img :src="formatJson(data.product.media)" :alt="pic" />
+                    <img
+                      :src="formatJson(data.product.media)"
+                      :alt="pic"
+                      class="rounded mx-auto d-block"
+                    />
                   </div>
                   <div class="card-detail">
                     <div class="card-detail-title">
